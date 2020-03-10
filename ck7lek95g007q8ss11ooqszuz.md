@@ -8,5 +8,6 @@ It's likely your scroll view is displaying stuff BEHIND that white background. S
 
 You need to tell the scrollview to offset its bottom edge inset by the height of that button background. Then the scrollview knows it's stopping before the button begins.
 
-To do that, use the following code, where `40` represents the height of the white background.
+To do that, use the following code, where `40` represents the height of the white background:
+
 `myScrollView.contentInset.bottom = 40`
