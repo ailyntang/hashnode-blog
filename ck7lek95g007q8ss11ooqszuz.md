@@ -24,3 +24,6 @@ To do that, use the following code, where `40` represents the height of the whit
 If you are using Frames instead of AutoLayout, then you will need to set the property `contentSize`. Otherwise the scrollview won't scroll.
 
 You can set this in `viewDidLayoutSubviews()`. Online I have read that you should set this in `viewWillAppear`, because if you set it in `viewDidLoad`, there will be issues as `viewDidLoad` is called too early on.
+
+# Articles
+https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/KeyboardManagement/KeyboardManagement.html#//apple_ref/doc/uid/TP40009542-CH5-SW1
