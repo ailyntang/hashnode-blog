@@ -32,3 +32,14 @@ This does my head in a bit. Have to figure it out - look at Rx Swift documentati
 
 
 Analogies: turn on the water in the pipe. Observables are pipes. Can add more pipes on top of each other.
+
+every chained method is a new pipe that you are adding on. So you can have lots of complex pipes.
+
+`debounce(200)` waits 2ms, then takes the most recent action and does something
+`throttle(200)` takes the very first call, then waits 2ms before executing. So if other more relevant calls happen in that time, they are ignored. 
+Use throttle for something like same API call is made eachtime.
+Use debounce for seomthing like search API call, where you are entering key strokes and registering eveyr new key stroke in one observable. YOu want to wait until there is a 2ms pause in key strokes, then take ALL the key strokes (whereas throttle would take only the first key stroke so you would enver get to search the whole word, only the frist letter)
+
+DispatchQueue.gloabal() is background thread
+DispatchQueue.main is foreground thread
+
