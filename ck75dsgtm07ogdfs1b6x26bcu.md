@@ -6,7 +6,7 @@ This means you added the framework a different way. Maybe through a podfile.
 
 If you want to add it with Carthage, the first thing is to create a new branch in git, go into Xcode and delete the existing framework. Don't worry, you'll be adding it back soon enough.
 
-I've forgotten if you delete it from the Build Settings, or just in the folder hierarchy. I think it's the folder hierarchy.
+Delete it from the folder hierarchy. Move to trash. You shouldn't need to touch the build settings - that will update automatically.
 
 Find it under something like `Target > Frameworks folder`
 
@@ -21,8 +21,12 @@ This is where you tell Carthage which frameworks you want. It's like a Podfile f
 Your Cartfile will look something like:
 ```
 github "Alamofire"
-binary "https:www.rawgithubusercontent.com/blah/blah/name-of-framework.framework.json"
+binary "https:www.rawgithubusercontent.com/blah/blah/name-of-framework.json"
 ```
+
+The above code adds two frameworks - one for Alamofire using `github`, and another pretend framework if you are adding via a `binary`.
+
+You will use one OR the other when adding a new framework. You won't use both.
 
 # Update the one framework you added
 
