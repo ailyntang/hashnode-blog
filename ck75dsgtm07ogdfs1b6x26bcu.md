@@ -8,6 +8,10 @@ If you want to add it with Carthage, the first thing is to create a new branch i
 
 I've forgotten if you delete it from the Build Settings, or just in the folder hierarchy. I think it's the folder hierarchy.
 
+Find it under something like `Target > Frameworks folder`
+
+![Screen Shot 2020-04-27 at 6.58.54 am.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1587934746282/Pdst2tg53.png)
+
 # Add the new framework to your Cartfile
 
 Using Carthage to manage your frameworks means that you will have a Cartfile.
