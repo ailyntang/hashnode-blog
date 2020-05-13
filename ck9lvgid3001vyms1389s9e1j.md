@@ -26,3 +26,6 @@ It's handy for two reasons (taken from my great coworker):
 * the closure has multiple references to self; in this case, theoretically, the object referenced could be deallocated between uses of the reference resulting in an unexpected state.
 * the closure requires a non-optional reference of self to be passed into some function
 
+The other big reason for making `self` strong, is if you want all the elements to continue as a block.
+
+For example, if `self?.showNextScreen()` fails, then you probably don't want `self?.logAnalyticsEvent()` to run. So making `self` strong means that either both will fail or both will go through.
