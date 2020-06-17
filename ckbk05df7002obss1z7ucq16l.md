@@ -14,7 +14,10 @@ Only `@escaping` closures have potential issues with retain cycles
 * This makes a strong reference to `self` inside the rest of the closure
 * Use this to make life easier on yourself when coding, so you don't have to handle the `nil`
 * However note if you have nested closures after the `guard` statement, then these nested closures will hold a strong reference to `self`. So you will need to re-declare `[weak self]` again in those nested closures.
+* It's not a requirement, but ideally if you are going to declare `weak self` with nested closures, you may as well declare it on the overarching closure, rather than just the closure you think needs it. Then everything is safe.
 
 `if let self = self`
 * This only makes a strong reference to `self` inside the `if` statement
 * Outside the `if` statement, other `self` references will be weak
+
+Autoclosure - take a look at this concept
