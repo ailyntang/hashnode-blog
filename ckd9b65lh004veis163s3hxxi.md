@@ -1,4 +1,4 @@
-## Frameworks failing after update
+## Framework not found after carthage update
 
 If you get an error in Xcode such as `Framework not found GoogleDataTransportCCTSupport`, go here and delete it:
 
