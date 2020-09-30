@@ -16,7 +16,8 @@ You'll have a corresponding `CreateHabitHeaderView.swift` file as well, which li
 Here's what you need to do in the `.xib`.
 1. Set a custom class for the overall view (circled below in red). Currently my `.xib` is a collection view cell. Yours may be a view, or a table view cell, or something else. 
 
-![Screen Shot 2020-09-30 at 11.25.55 am.png]
+
+![Screen Shot 2020-09-30 at 11.25.55 am.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1601429775672/1cnWgeJe9.png)
 
 Open up the right hand nav in  Xcode. We want to set the custom class to `CreateHabitHeaderView`. This references your file `CreateHabitHeaderView.swift`.
 
