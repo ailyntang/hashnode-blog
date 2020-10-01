@@ -64,38 +64,83 @@ Given our nib is a `UIView`, we need the `.swift` file to declare `TimePicker` a
 
 **Initialise your nib**
 
-In order for another view to use your nib, you need to initialise it correctly.
+In order for another view to use your nib, you need to initialise it correctly. Below is an example of an initialiser. Let's go through each section.
 
-Firstly you need a `Bundle`. A bundle is initialised using a class. You have already defined a class in this file: `final class TimePicker: UIView`. 
+```
+private func commonInit() {
 
-Thus you can instantiate (a fancy way of saying create) a bundle with `let bundle = Bundle.init(for: TimePicker.self)`.
+        let bundle = Bundle.init(for: TimePicker.self) // 1 Initialise the bundle
+
+        // 2 Load the nib
+        if let viewsToAdd = bundle.loadNibNamed("TimePicker", owner: self, options: nil),
+            let contentView = viewsToAdd.first as? UIView {
+            addSubview(contentView) // 3 Add the nib to the parent view
+            contentView.frame = self.bounds // 4 Set the frame
+            contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth] // 5
+        }
+}
+```
+
+**1. Initialise the bundle**
+`let bundle = Bundle.init(for: TimePicker.self) // 1`
+
+Firstly you need a `Bundle`. A bundle is initialised using a class. You have already defined the class you want at the start of the `TimePicker.swift` file: `final class TimePicker: UIView`. 
+
+This is why you can initialise the bundle using `TimePicker.self`.
+
+
+**2. Load the nib**
 
 Next you want to load your `.xib` as part of that bundle. To do that, you use the code: `let viewsToAdd = bundle.loadNibNamed("TimePicker", owner: self, options: nil)`.
 
 Xcode doesn't know how many different views are in the nib, `TimePicker.xib`. Xcode also doesn't know what type of views exist. The views could be `UIView`, `UITableViewCell`, `UICollectionViewCell` etc.
 
-Thus the above line of code will return an array of objects, `[Any]`.
+Thus the above line of code will return an array of objects, `[Any]`, and store this in `viewsToAdd`.
 
-In my example, I only have one `UIView` in `TimePicker.xib`.
+In my example, I only have one `UIView` in `TimePicker.xib`. I need to tell Xcode this information, so that I can access it later as a custom view.
 
-I need to tell Xcode this information, so that I can access it later as a custom view.
+To do this, I use `let contentView = viewsToAdd.first as? UIView`. Note I am casting with an optional. I know this won't fail as my nib has a `UIView`. But if the nib had something which could not be cast as a `UIView`, then `contentView` would be `nil`.
 
-To do this, I use `let contentView = viewsToAdd.first as? UIView`. Note I am casting with an optional. I know this won't fail as my nib has a `UIView`. But if the nib had something which could not be case as a `UIView`, then `contentView` would be `nil`.
+**3. Add the nib to the parent view**
+
+Next I tell the super view to add the custom view I created in my nib, now known as `contentView`: `addSubview(contentView)`
+
+If I skip this step, I won't see my custom view when I run the app. 
+
+**4. Set the frame**
+
+When I want to add this custom view to a storyboard, I first need to add a `UIView` object to the storyboard. As with all UI objects, I will need to set its constraints, ie. how this view should be positioned relative to the other objects in the storyboard, and its height and width.
+
+These constraints will be translated into the object's "frame", which is of type `CGRect`.
+
+So our `UIView` object on the storyboard now has its own frame, let's call it Frame S (for Storyboard).
+
+Next, tell the storyboard to associate this view object with our custom view object, `TimePicker`. We do this by setting the custom class through the right hand nav.
+
+Once we do this, the app will run through the initialisers in `TimePicker.swift`. 
+
+By using `contentView.frame = self.bounds`, I am telling Xcode to make sure that the `TimePicker` view uses Frame S. This is important - it means Frame S will override the constraints that I set in `TimePicker.xib`.
+
+For example, if Frame S has a width of 100, but `TimePicker.xib` needs a width of 400, then Frame S wins. The storyboard will truncate the width of the custom view.
+
+If I don't want this to happen, then I can define my own frame in the `commonInit()`. This means I would write something like `contentView.frame = CGRect(0, 0, 400, 80)`.
+
+Now we are telling Xcode to ignore Frame S when creating `TimePicker`, and to make sure that `TimePicker` always has width 400 and height 80.
+
+There are pros and cons to either method, as always with programming. If you use Frame S, you can rely on the fact that the custom view will be at least the size of Frame S. Note that if the actual size of the nib is larger than what you specified in Frame S, the custom view will still appear in its actual size when the app runs. However its frame, which has the background color for example, will be sized as per Frame S.
+
+If you specify the frame in the initialiser, then you know your custom view will always be the right size. However you rely on the programmer making sure that there is enough space in the storyboard to accommodate your custom view.
+
+I haven't written this very clearly. The best way is to set a background color on the UIView and the custom view and play around with it.
 
 
-```
-private func commonInit() {
+*
+Next I set the frame of my custom view. I have chosen to say it should follow the bounds of the `UIView` that is added to the storyboard.  I need to define the frame for this object (let's call these Frame A), and then I will set the custom class of the view object to be `TimePicker`.
+*
 
-        let bundle = Bundle.init(for: TimePicker.self)
 
-        if let viewsToAdd = bundle.loadNibNamed("TimePicker", owner: self, options: nil),
-            let contentView = viewsToAdd.first as? UIView {
-            addSubview(contentView)
-            contentView.frame = self.bounds
-            contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        }
-}
-```
+
+
 
 
 **Override the default initialiser**
