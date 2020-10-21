@@ -6,6 +6,7 @@
 * You can always put in `[weak self]` to be safe, but it's not required. And probably good practice to really think about why you are putting it there, rather than just scattering the whole code base with unnecessary `[weak self]`
 *  [This article](https://www.avanderlee.com/swift/weak-self/) is super helpful. Basically - put `deinit` everywhere to debug and see if things are being retained unexpectedly. 
 * If a closure references a function, I think in most instances, you don't need `[weak self]`. Even if the function then accesses variables.
+*  [Another helpful article](https://www.swiftbysundell.com/questions/is-weak-self-always-required/) about the general concept of when you have a retain cycle vs not.
 
  [This article](https://matteomanferdini.com/swift-weak-self/) talks specifically about timers. I implemented what it said would cause a retain cycle, then tried to catch the retain cycle using `leaks` and also `deinit`. But I couldn't catch it out :( So now I'm not too sure how to catch the retain cycle.
 
