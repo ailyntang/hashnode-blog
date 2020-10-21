@@ -7,6 +7,8 @@
 *  [This article](https://www.avanderlee.com/swift/weak-self/) is super helpful. Basically - put `deinit` everywhere to debug and see if things are being retained unexpectedly. 
 * If a closure references a function, I think in most instances, you don't need `[weak self]`. Even if the function then accesses variables.
 
+ [This article](https://matteomanferdini.com/swift-weak-self/) talks specifically about timers. I implemented what it said would cause a retain cycle, then tried to catch the retain cycle using `leaks` and also `deinit`. But I couldn't catch it out :( So now I'm not too sure how to catch the retain cycle.
+
 ## Only `@escaping` closures have potential issues with retain cycles
 * The only time a retain cycle should be created is if the closure STORES a value
 * If it's just accessing a function, but nothing is stored, then there shouldn't be a retain cycle
