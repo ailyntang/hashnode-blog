@@ -5,6 +5,7 @@
 * `.forEach` is an example of a closure, and it is non-escaping
 * You can always put in `[weak self]` to be safe, but it's not required. And probably good practice to really think about why you are putting it there, rather than just scattering the whole code base with unnecessary `[weak self]`
 *  [This article](https://www.avanderlee.com/swift/weak-self/) is super helpful. Basically - put `deinit` everywhere to debug and see if things are being retained unexpectedly. 
+* If a closure references a function, I think in most instances, you don't need `[weak self]`. Even if the function then accesses variables.
 
 ## Only `@escaping` closures have potential issues with retain cycles
 * The only time a retain cycle should be created is if the closure STORES a value
