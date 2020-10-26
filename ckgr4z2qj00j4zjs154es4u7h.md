@@ -1,5 +1,12 @@
 ## Create string of the class name
 
+Summary:
+```
+String(describing: Self.self) // "SleepViewController"
+String(describing: type(of: self)) // "SleepViewController"
+String(describing: self) // "<__lldb_expr_160.SleepViewController: 0x7fec8bf09930>"
+```
+
 Use `String(describing: Self.self)`, which will give you a string such as `"SleepViewController"`.
 
 This is the same as using `String(describing: type(of: self))`.
