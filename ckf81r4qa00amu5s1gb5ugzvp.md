@@ -33,6 +33,8 @@ extension HomeViewController: UITableViewDelegate {
 
 ```
 
+For more details, take a look at [this article](https://www.hackingwithswift.com/example-code/uikit/how-to-use-dependency-injection-with-storyboards).
+
 # Prior to iOS 13
 
 Prior to iOS 13, it was really tough to use MVVM with storyboards. So if you wanted a storyboard generated view controller to have a view model, there was quite a long process to go through.
