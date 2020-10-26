@@ -1,6 +1,6 @@
 ## Create string of the class name
 
-Use `String(describing: Self.self)`, which will give you a string such as `"SleepViewController".
+Use `String(describing: Self.self)`, which will give you a string such as `"SleepViewController"`.
 This is the same as using `String(describing: type(of: self))`.
 
 However you do not want to use `String(describing: self)`. This gives a much more complex string such as `"<__lldb_expr_160.SleepViewController: 0x7fec8bf09930>"`
