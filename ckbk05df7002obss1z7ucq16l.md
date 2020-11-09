@@ -10,6 +10,63 @@
 
  [This article](https://matteomanferdini.com/swift-weak-self/) talks specifically about timers. I implemented what it said would cause a retain cycle, then tried to catch the retain cycle using `leaks` and also `deinit`. But I couldn't catch it out :( So now I'm not too sure how to catch the retain cycle.
 
+```
+  
+import UIKit
+
+class RootVC {
+    var settingsVCWeak: SettingsVC {
+        let vc = SettingsVC()
+        vc.didModifySettings = { [weak self] in
+            self?.updateView()
+        }
+        return vc
+    }
+    
+    var settingsVCStrong: SettingsVC {
+        let vc = SettingsVC()
+        vc.didModifySettings = {
+            self.updateView()
+        }
+        return vc
+    }
+    
+    init() {
+        print("init root")
+    }
+    
+    deinit {
+        print("deinit root vc")
+    }
+    
+    func updateView() {
+        print("update view")
+    }
+    
+}
+
+class SettingsVC {
+    var didModifySettings: (() -> Void)?
+    
+    init() {
+        print("init settingsVc")
+    }
+    
+    deinit {
+        print("deinit settingsvc")
+    }
+    
+}
+
+var root: RootVC? = RootVC()
+//var testWeak: SettingsVC? = root?.settingsVCWeak
+//var testStrong: SettingsVC? = root?.settingsVCStrong
+
+root = nil
+//testWeak = nil
+//testStrong = nil
+```
+
 ## Only `@escaping` closures have potential issues with retain cycles
 * The only time a retain cycle should be created is if the closure STORES a value
 * If it's just accessing a function, but nothing is stored, then there shouldn't be a retain cycle
