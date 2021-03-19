@@ -1,4 +1,4 @@
-## Remove all tap gestures when preparing for reuse
+## Tableview & collection view cells: Remove all tap gestures when preparing for reuse
 
 When you use cells in a table view, they get reused with new content.
 
