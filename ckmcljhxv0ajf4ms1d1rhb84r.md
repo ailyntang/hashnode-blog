@@ -2,7 +2,7 @@
 
 When you use cells in a table view, they get reused with new content.
 
-You need to properly remove all the gestures as part of the reuse, otherwise odd things may happen.
+If you have tappable / interactive elements in those cells, such as buttons or carousels etc, you need to properly remove all the gestures as part of the reuse, otherwise odd things may happen.
 
 This means you'll need to do something like:
 
