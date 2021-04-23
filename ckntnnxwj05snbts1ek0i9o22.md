@@ -9,3 +9,5 @@
 
 You need to set the delegate for the mapview.
 If you haven't, then when you try to update the map view, nothing will happen and you'll see this message in the debug console: `[Client] {"msg":"#NullIsland Either the latitude or longitude was exactly 0! That's highly unlikely", "latIsZero":0, "lonIsZero":0}  `
+
+![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1619157170315/HloV_mRqf.png)
