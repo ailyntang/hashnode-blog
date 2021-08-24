@@ -18,3 +18,10 @@ final class CustomCell: UITableViewCell {
     }
 }
 ```
+Side note: never directly add to the table view cell view. 
+Always add views to the `contentView`.
+
+Apple uses the content view to manage all sorts of things, like sliding, taps etc. 
+The fact that developers can still accidentally add things to the cell rather than the content view seems like a legacy issue that Apple is no longer supporting.
+
+The tricky part is that if you add it to the view by accident, things look normal. But you should never add to the cell view as there could be unintended or unknown side effects.
