@@ -49,7 +49,7 @@ What does this script do?
 
 **4. Delete the old framework in Xcode**
 
-1. Inside Xcode, navigate to where the frameworks are kept
+1. Inside Xcode, navigate to `Targets > <Project name> > General > Frameworks, Libraries, and Embedded Content`
 2. Delete old framework from this section
 3. Find the framework in the Frameworks folder in the left hand navigation menu of Xcode (or find it in Finder). If the framework still exists there, delete it (move to trash)
 
@@ -78,6 +78,6 @@ What does this script do?
 
 **Xcode error: `Building for iOS Simulator, but the linked and embedded framework 'xFramework.framework' was built for iOS + iOS Simulator.`**
 
-* Inside the frameworks folder
+* Navigate to: `Targets > <Project name> > General > Frameworks, Libraries, and Embedded Content`
 * Ensure the framework is set to `Do not embed`
 
