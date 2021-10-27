@@ -2,7 +2,17 @@
 
 Sometimes you want to trace thing, like load times of certain sections in your app.
 
-Be careful: if you are using something like `trace[id]`, make sure you force this to be on the main queue. Dictionaries are not thread safe.
+Be careful: if you are using something like `trace[id]`, make sure you force this to be on the main queue, and a specific queue.
+Dictionaries are not thread safe.
+
+Use something like:
+```
+let queue = DispatchQueue(label: "myCustomTrace")
+queue.sync {
+    // code with `trace[id]` in here
+}
+```
+
 
 Then to find your custom trace in Crashlytics:
 
