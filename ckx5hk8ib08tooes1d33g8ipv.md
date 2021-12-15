@@ -82,12 +82,17 @@ action = {  [weak self] in
 ```
 
 
+--------
+# General ARC concepts
 
+Key things to remember
+* Only reference types have a ARC
+* 
 
 
 
 --------
-Notes to delete 
+# Notes to delete 
 
 Let's say you have `MainViewController`, with a button in it.
 When you tap the button, it performs an action.
