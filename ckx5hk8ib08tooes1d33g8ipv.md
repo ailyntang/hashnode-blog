@@ -1,4 +1,19 @@
-## Strong reference cycles with closures - WIP
+## Strong reference cycles with closures
+
+# General ARC concepts
+
+Key things to remember
+* Only reference types (e.g. class) have a ARC
+* The instance of a class is what gets a reference count, not the UI element inside the class
+* If structs are referred to inside a closure, then the struct is copied
+* If reference types are referred to inside a closure, then that increases the count of that instance, and can lead to a retain cycle
+
+
+The variables, constants, UI elements, closures etc inside the class do NOT have their own reference count.
+
+So whenever something has a strong reference to a button, or a closure, it's the class that has an increased count. Not the button or the closure.
+
+---------
 
 # Example 1: NO GOOD - outer closure has a strong reference to `self`
 
@@ -69,6 +84,12 @@ action = {  [weak self] in
 
 # Example 3: guard let cake = self
 
+Now that we are explicitly giving the strong reference to `self` a different name, `cake`, then it is really clear that the nested closure is not using `cake`. 
+
+So no retain cycle there.
+
+If the nested closure used `cake.doThing()`, then there would be a retain cycle, and we should have `view.action { [weak cake] in cake?.doThing() }`
+
 ```
 // Outer closure
 action = {  [weak self] in
@@ -81,51 +102,3 @@ action = {  [weak self] in
 }
 ```
 
-
---------
-# General ARC concepts
-
-Key things to remember
-* Only reference types have a ARC
-* 
-
-
-
---------
-# Notes to delete 
-
-Let's say you have `MainViewController`, with a button in it.
-When you tap the button, it performs an action.
-
-This action is a closure.
-
-
-Some psuedocode:
-
-```
-class MainViewController: UIViewController {
-
-   let title: String = "Ho ho ho"
-   let button = UIButton()
-
-   func updateTitleTo(_ newTitle: String) {
-       title = newTitle
-   }
-}
-```
-
-Now when we tap the button:
-```
-button.tap {
-   self.updateTitleTo("meep morp")
-}
-```
-
-This closure has a strong reference to self.
-So we introduce a `[weak self]` to avoid a retain cycle.
-
-But note if we have `guard let self = self else { return }` then have a nested closure, the nested closure will have a strong reference to `self` by default.
-
-So the nested closure also needs to have `[weak self]`.
-
-----------
