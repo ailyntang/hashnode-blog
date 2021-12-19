@@ -7,6 +7,7 @@ Key things to remember
 * The instance of a class is what gets a reference count, not the UI element inside the class
 * If structs are referred to inside a closure, then the struct is copied
 * If reference types are referred to inside a closure, then that increases the count of that instance, and can lead to a retain cycle
+* "capturing"  refers to something outside the closure being referenced inside the closure. If `someClass` is passed into the closure, it isn't getting "captured". So the use of `someClass` does not add a count to `someClass`'s ARC.
 
 
 The variables, constants, UI elements, closures etc inside the class do NOT have their own reference count.
