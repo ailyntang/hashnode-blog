@@ -7,6 +7,8 @@ tags: swiftui
 
 ---
 
+# Episode 1: setup the groundwork
+
 [https://talk.objc.io/episodes/S01E261-views-and-nodes](https://talk.objc.io/episodes/S01E261-views-and-nodes)
 
 What is covered
@@ -23,3 +25,70 @@ What I learnt
 * This kind of video is not my jam. I have to really pay attention, otherwise I drift
     
 * I prefer videos which are less abstract, and more about using `SwiftUI` to demonstrate what `SwiftUI` does. Rather than videos which build something else.
+    
+
+# Episode 2: build observable / observed relationship
+
+[https://talk.objc.io/episodes/S01E262-observed-objects](https://talk.objc.io/episodes/S01E262-observed-objects)
+
+This is getting more interesting / useful for my purposes.
+
+Specifically: `let cancellable = view.objectWillChange.sink { ... }` at 9:00 of the video
+
+Things they discussed that seem very relevant to me:
+
+> The `cancellable` must be stored in order to keep the subscription alive
+
+* I assume the subscription is the observer. So if that's not kept alive, then if the object changes, no one will be notified of its change.
+    
+
+> An observed object will never be passed around. It will always be the property of a single view.
+> 
+> If you want to observe the same object multiple times, you will need to create multiple observed objects.
+
+hmm. Ok.
+
+So let's say I have a modal with two boxes.
+
+The user can select one of the two boxes, and I want the UI to update:
+
+* On the modal: the box that is tapped gets outlined; the other box is no longer outlined
+    
+* On the underlying page that presented the modal: this displays the user's modal selection
+    
+
+Then do we have TWO observed objects?
+
+Box one AND box two?
+
+For the underlying page, it observes when box one is tapped, then it sends a signal and the user's selection is displayed.
+
+* This makes sense to me
+    
+
+But.. what about on the modal?
+
+So Box one is observed by box two- and then if box one is tapped, box two updates itself.
+
+And vice versa.
+
+So the relationship is:
+
+* `BoxOne: ObservedObject`
+    
+    * Observed by `BoxTwo` and `UsersModalSelection`
+        
+* `BoxTwo: ObservedObject`
+    
+    * Observed by `BoxOne` and `UsersModalSelection`
+        
+
+So then.. we have something like:
+
+```plaintext
+
+let cancellable = boxOne.objectWillChange.sink { _ in
+   // tell observers? 
+   // Or is that what `objectWillChange` does?
+}
+```
