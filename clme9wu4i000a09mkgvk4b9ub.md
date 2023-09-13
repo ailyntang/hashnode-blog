@@ -92,3 +92,21 @@ let cancellable = boxOne.objectWillChange.sink { _ in
    // Or is that what `objectWillChange` does?
 }
 ```
+
+# Episode 3: TupleView
+
+Now they try to see if they can replicate the SwiftUI functionality with a nested view.
+
+This video sets up the start of the code for that, but doesn't get the full way there.
+
+* First they copy and paste their code, built with only the Foundation api, into an app which is running the SwiftUI api
+    
+* We see that yes, it works as expected
+    
+* Then, they setup tests and code to test the nested views
+    
+* As part of this setup, they refactor the code with a `@resultsBuilder`.
+    
+    * This is the interesting part to me - as I have seen Ryan do this with `@CellsBuilder` . Now I know where it's from!
+        
+    * Originally this was a `@_functionBuilder` that was replaced with `@resultsBuilder` when they added a second function
