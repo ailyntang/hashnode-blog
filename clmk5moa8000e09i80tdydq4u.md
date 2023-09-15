@@ -17,9 +17,9 @@ tags: swiftui
         
 * Reference types (`class`): use `@Published var`
     
-    * For some reason, `@Published` does not need to be `private`
-        
     * `@Published` is an attribute
+        
+    * `@Published` is not private, because other views will need access to this property
         
     * Ensure the class is observable, by conforming to the `ObservableObject` protocol, e.g. `final class EditWorkoutView: View, ObservableObject`
         
