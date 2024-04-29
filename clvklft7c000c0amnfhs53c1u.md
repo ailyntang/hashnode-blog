@@ -22,7 +22,16 @@ It depends on the level of flexibility you would like.
 
 With all the above property declarations, you may also need to add `= null!` at the end of the declaration.
 
-This depends on the project settings, and /or whether your solution could actually initialise the property and end up with a Null Reference Exception (NRE)
+This depends on a few things:
+
+* the project settings
+    
+* whether the compiler thinks your solution could actually initialise the property and end up with a Null Reference Exception (NRE)
+    
+* whether you are using a value type (e.g. `bool`) or reference type
+    
+    * Value types have a default value. You will never need to add `= null!` when declaring a value type
+        
 
 ```plaintext
 <PropertyGroup>
