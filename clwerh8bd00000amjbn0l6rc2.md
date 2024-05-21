@@ -11,7 +11,29 @@ So the concept of `async awaits` is just the standard asynchronous vs synchronou
 
 But, the C# under the hood state machine is new to me.
 
-Some concepts I learnt.
+Some concepts I learnt
+
+* When is it relevant to use `async awaits`?
+    
+* You don't need to immediately `await` the task
+    
+* `async await` generates a lot of code under the hood
+    
+* `async` allows your system to scale
+    
+
+---
+
+### When is it relevant to use `async awaits`?
+
+There are two relevant use cases for `async awaits`
+
+1. **I/O-bound**: when you are waiting for something, like reading from a database, writing to a database
+    
+2. **CPU-bound**: when you don't want to freeze your UI (at work, this use case is not relevant for us)
+    
+
+---
 
 ### You don't need to immediately `await` the task
 
@@ -23,6 +45,13 @@ You can separate
     
 
 At Empower we often need the result straight away, which is why we almost always use `var result = await CreamButterAndSugarAsync();`
+
+Here's how I *think* you would separate the two, based on some YouTube clips
+
+* But I get the feeling this is wrong
+    
+* I think you actually need to do something like `CreamButterAndSugarAsync().Start / .Run` or something like that.
+    
 
 ```plaintext
 private async Task<Batter> CreamButterAndSugarAsync()
@@ -44,6 +73,8 @@ public async Task MakeBananaCake()
    // add eggs to `batter`
 }
 ```
+
+---
 
 ### `async await` generates a lot of code under the hood
 
@@ -79,3 +110,50 @@ public class C {
 ```
 
 It comes back with a LOT of code.
+
+---
+
+### `async` allows your system to scale
+
+So. You have some code that does this inside a `public class MakeCake`
+
+```plaintext
+var cakeBatter = await MakeCakeBatterAsync();
+var pourIntoPan = await PourIntoPanAsync(cakeBatter);
+var cookedCake = await PutInOvenAsync(cakeBatter, 200C, 20mins);
+var icedCake = await CoolDownThenIceAsync(cookedCake, 20mins);
+```
+
+Here's the thing. These are all async functions, because you are getting them to do things that take time.
+
+* BUT, they are run one after the other.
+    
+* You are waiting for the output of one, so that you can use it as the input to the next.
+    
+* So.. it looks kinda "synchronous" to me.
+    
+
+Why bother with the `async`?
+
+* To optimise "resource allocation" (that may not be the right term). But basically, to make good use of your resources.
+    
+* If you made everything synchronous, for your particular `MakeCake` class, there would be no change when you ran it once, for one user.
+    
+    * The server holds on to the `MakeCake` class, and until everything is finished, it just sits `MakeCake` and holds its hand the entire time
+        
+* BUT, if you have multiple requests to `MakeCake`, all of a sudden, your resources are going to be tied up, and you won't be able to fulfil many cake orders when you are running them all synchronously.
+    
+* If `MakeCake` is made up of `async await` methods
+    
+    * Each time an async method is called, that "instance" of `MakeCake` can be "released" and used to go do something else, as the state machine holds the state of `MakeCake`
+        
+    * Until the async method is finished, the server knows there's nothing else it can do.
+        
+    * Whilst it waits for the method to finish, the server can go away and use that resource to do something else, like make another cake (instead of sitting there, holding the hand of the synchronous `MakeCake` )
+        
+* With async methods, you can exponentially increase the number of cakes you can make per second
+    
+
+So.. `async await` will not speed up the time it takes to make ONE cake.
+
+But, it will mean that you can make 10,000 cakes at once, instead of only 5 cakes at once.
