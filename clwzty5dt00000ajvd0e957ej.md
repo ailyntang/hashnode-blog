@@ -7,4 +7,11 @@ tags: learning-journey
 
 ---
 
+Finished
+
 * [Intro to Web API in .NET 6](https://coderlyn.hashnode.dev/intro-to-web-api) (4 Jun 2024)
+    
+
+Next
+
+* [https://www.youtube.com/watch?v=1ck9LIBxO14&t=5s&pp=ygUYaWFtdGltY29yZXkgYXNwLm5ldCBjb3Jl](https://www.youtube.com/watch?v=1ck9LIBxO14&t=5s&pp=ygUYaWFtdGltY29yZXkgYXNwLm5ldCBjb3Jl)
