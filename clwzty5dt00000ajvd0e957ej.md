@@ -14,4 +14,10 @@ Finished
 
 Next
 
-* [https://www.youtube.com/watch?v=1ck9LIBxO14&t=5s&pp=ygUYaWFtdGltY29yZXkgYXNwLm5ldCBjb3Jl](https://www.youtube.com/watch?v=1ck9LIBxO14&t=5s&pp=ygUYaWFtdGltY29yZXkgYXNwLm5ldCBjb3Jl)
+* Read [https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0)
+    
+    * Understand pipeline, and the middleware that can run on it
+        
+* Start a web api via command line, something like: `dotnet new webapi --use-controllers`
+    
+* Start playing - see the middleware that is run on `Program.cs`
