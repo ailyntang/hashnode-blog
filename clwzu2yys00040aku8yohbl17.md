@@ -13,7 +13,9 @@ What I learnt
 
 * There are two types of web APIs
     
-    * Minimal and `full`(? normal?)
+    * Minimal API
+        
+    * API using Controllers (not sure what this is called - `full`? normal?)
         
 
 These APIs serve users. The users aren't necessarily humans.
