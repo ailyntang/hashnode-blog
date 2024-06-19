@@ -17,7 +17,11 @@ Links to topics that I have researched and summarised
     
 * [Custom middleware](https://coderlyn.hashnode.dev/aspnet-core-custom-middleware) (13 June 2024)
     
+* [Different types of caching](https://hashnode.com/draft/66726f7420eb05a21afc7fbb) (19 June 2024)
+    
 
 Next
 
 * Nuget packages, central package manager, azure pipelines
+    
+* Lazy loading
