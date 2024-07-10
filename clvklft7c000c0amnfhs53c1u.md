@@ -9,14 +9,30 @@ tags: csharp
 
 There are multiple ways to declare a property.
 
-It depends on the level of flexibility you would like.
+Here are different ways, which vary the access level of the `setter`, from the most protected to the most open:
 
-* `{ get; init; }`: most private. This is read only, both internally and externally.
+* `{ get; protected init; }`
     
-* `{ get; }`: middle ground. Read only externally; but able to be overwritten internally. This is like `private(set)` in Swift
+    * Initialising this value can happen only in the class where this is declared, and also in classes that are derived from the base class
+        
+    * Once the value is set, it is read only, both internally and externally
+        
+* `{ get; init; }`
     
-* `{ get; set; }`: most open. Anything can overwrite the value of this property.
+    * Any class can initialise and set this value
+        
+    * Once the value is set, it is read only, both internally and externally
+        
+* `{ get; }`
     
+    * Read only externally
+        
+    * Can be overwritten internally. This is like `private(set)` in Swift
+        
+* `{ get; set; }`
+    
+    * Anything can overwrite the value of this property
+        
 
 ---
 
