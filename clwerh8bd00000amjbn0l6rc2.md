@@ -3,7 +3,34 @@ title: "c#: async awaits - under the hood"
 datePublished: Mon May 20 2024 09:26:00 GMT+0000 (Coordinated Universal Time)
 cuid: clwerh8bd00000amjbn0l6rc2
 slug: c-async-awaits-under-the-hood
-tags: csharp
+tags: csharp, interview-prep
+
+---
+
+*Updated: Feb 2025*
+
+Key points about `async awaits`
+
+* There are two relevant use cases for `async awaits`
+    
+    1. **I/O-bound**: when you are waiting for something, like reading from a database, writing to a database
+        
+    2. **CPU-bound**: when you don't want to freeze your UI (at work, this use case is not relevant for us)
+        
+* Benefits
+    
+    * Better resource management. Once you use `await`, the system deallocates the thread and allows something else to use that resource. This means you can scale to 1000 people making toast in the morning, even though `async await` is NOT the same as parallel programming
+        
+    * If you use `async`, the true benefit only comes with the `await` for the resource management
+        
+* Pitfalls
+    
+    * Once you start.. you can’t stop ! *Everything* in your system ends up needing to be async, as you bubble up the async. Mixing sync and async is not good practice.
+        
+* Alternatives
+    
+    * There aren’t really any alternatives
+        
 
 ---
 
