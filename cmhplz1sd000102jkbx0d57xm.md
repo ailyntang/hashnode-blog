@@ -31,3 +31,20 @@ Brute force:
 * I also knew this would be poorly optimized for big O notation (time and space)
     
 * I thought I’d optimised it because I was reducing the size of the array each time, but, even still, it wasn’t great apparently.
+    
+
+### Big O notation
+
+* Time is more important than Space (memory / storage)
+    
+* Often, the brute force will have
+    
+    * Time = O(n²) and Space = O(1)
+        
+    * The largest possible time
+        
+    * The smallest possible space, because you’re not storing anything
+        
+* Time is MUCH more important to optimise, because memory is cheap and enormous
+    
+    * Often, there is a way to flip **Time = O(n²) and Space = O(1)** to **Time = O(n) and Space = O(n)**
