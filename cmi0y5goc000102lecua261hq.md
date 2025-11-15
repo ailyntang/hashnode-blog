@@ -9,7 +9,7 @@ tags: swift, leetcode
 
 [https://leetcode.com/problems/merge-strings-alternately/editorial/?source=submission-ac](https://leetcode.com/problems/merge-strings-alternately/editorial/?source=submission-ac)
 
-### In swift, you cannot access characters like `someString[3]`
+### In swift, you cannot access characters by `someString[3]`
 
 * It’s a big song and dance with getting a string index from the startIndex
     
